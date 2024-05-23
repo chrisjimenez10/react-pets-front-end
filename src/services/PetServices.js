@@ -11,6 +11,37 @@ const fetchPets = async () => {
     }
 };
 
-const 
+const fetchSinglePet = async (id) => {
+    try {
+        const response = await fetch(`${BASE_URL}/${id}`);
+        const data = await response.json();
+        console.log(data);
+        return data;
+    }catch(error){
+        console.error(error);
+    }
+};
 
-export {fetchPets};
+const updatePet = async (id) => {
+    try{
+        const response = await fetch(`${BASE_URL}/${id}`);
+        const data = await response.json();
+        console.log(data);
+        return data; 
+    }catch(error){
+        console.error(error);
+    }
+};
+
+const deletePet = async(id) => {
+    try{
+        const response = await fetch(`${BASE_URL}/${id}`);
+        const data = await response.json();
+        console.log(data);
+        return data;
+    }catch(error){
+        console.error(error);
+    }
+};
+
+export {fetchPets, fetchSinglePet, updatePet, deletePet};
