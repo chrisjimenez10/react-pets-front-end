@@ -22,9 +22,15 @@ const fetchSinglePet = async (id) => {
     }
 };
 
-const updatePet = async (id) => {
+const updatePet = async (id, petData) => {
     try{
-        const response = await fetch(`${BASE_URL}/${id}`);
+        const response = await fetch(`${BASE_URL}/${id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(id, petData),
+        });
         const data = await response.json();
         console.log(data);
         return data; 
@@ -35,7 +41,9 @@ const updatePet = async (id) => {
 
 const deletePet = async(id) => {
     try{
-        const response = await fetch(`${BASE_URL}/${id}`);
+        const response = await fetch(`${BASE_URL}/${id}`, {
+            method: "DELETE",
+        });
         const data = await response.json();
         console.log(data);
         return data;
@@ -44,4 +52,21 @@ const deletePet = async(id) => {
     }
 };
 
-export {fetchPets, fetchSinglePet, updatePet, deletePet};
+const createPet = async(petData) => {
+    try{
+        const response = await fetch(BASE_URL, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(petData),
+        });
+        const data = await response.json();
+        console.log(data);
+        return data;
+    }catch(error){
+        console.error(error);
+    }
+}
+
+export {fetchPets, fetchSinglePet, updatePet, deletePet, createPet};
